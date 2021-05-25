@@ -19,5 +19,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// API route
+// API route all methods are same like ResourceController
+// index, |create, store($request)|, show($id), |edit($id), update($request, $id)|, destroy($id)
+// Now we have to create the Category API
 Route::get('categories', [CategoryController::class, 'index']);
+
+// "{category}" will use Route Model Binding
+Route::get('categories/{category}', [CategoryController::class, 'show']);
