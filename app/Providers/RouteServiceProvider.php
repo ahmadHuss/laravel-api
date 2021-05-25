@@ -37,6 +37,8 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->configureRateLimiting();
 
+        // Here by default Laravel prefixes the api routes
+        // with the "api" keyword
         $this->routes(function () {
             Route::prefix('api')
                 ->middleware('api')
