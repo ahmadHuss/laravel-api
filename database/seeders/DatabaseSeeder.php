@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,5 +19,6 @@ class DatabaseSeeder extends Seeder
         // If you don't want to save on the database
         // you can use `make()` instead of `create()`.
         Category::factory(12)->create();
+        Product::factory(12)->create();
     }
 }
