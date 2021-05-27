@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,3 +27,9 @@ Route::get('categories', [CategoryController::class, 'index']);
 
 // "{category}" will use Route Model Binding
 Route::get('categories/{category}', [CategoryController::class, 'show']);
+
+
+// Product API
+Route::get('products', [ProductController::class, 'index']);
+// "{product}" will use Route Model Binding
+Route::get('products/{product}', [ProductController::class, 'show']);
