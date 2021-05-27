@@ -13,7 +13,10 @@ class CategoryController extends Controller
     public function index(){
        //  return Category::orderBy('id')->get(); // Laravel will return as JSON format.
       // We only want id, name filed in the response.
-        return Category::select('id','name')->get();
+       // $categories = Category::select('id','name')->get(); This is efficient approach.
+       // But we are already defined our toArray response
+        $categories = Category::all();
+        return CategoryResource::collection($categories); // Now we are returning resource collection
     }
 
     // Route model binding
