@@ -60,7 +60,7 @@
                                 </a>
                                 <div class="card-body">
                                     <h4 class="card-title">
-                                        <a href="/product/{{ $product->name }}">{{ $product->name }}</a>
+                                        <a href="/product/{{ $product->name }}">{{ ucfirst($product->name) }}</a>
                                     </h4>
                                     <h5>${{ $product->price }}</h5>
                                     <p class="card-text">
