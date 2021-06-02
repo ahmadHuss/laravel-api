@@ -11,6 +11,8 @@
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 
+    <!-- Bootstrap core CSS -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
 <body style="padding-top: 56px">
@@ -44,6 +46,7 @@
 <!-- Bootstrap core JavaScript -->
 <script src="{{ asset('js/jquery.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
 
 
 </body>
