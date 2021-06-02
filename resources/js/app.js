@@ -18,7 +18,7 @@ window.Vue = Vue;
 // your own filters/methods that use lodash methods instead
 Vue.prototype._ = _;
 // id app
-Vue.component('front-page', require('./components/Front.vue').default);
+Vue.component('front-page', require('./components/FrontPage.vue').default);
 // Load third party vue component `laravel-vue-pagination`
 Vue.component('pagination', require('laravel-vue-pagination'));
 

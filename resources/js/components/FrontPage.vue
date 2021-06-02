@@ -67,6 +67,7 @@
 <!-- JavaScript Part -->
 <script>
 export default {
+    name: 'FrontPage',
     // Public properties
     data: function(){
       return {
