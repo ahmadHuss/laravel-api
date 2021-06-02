@@ -27,6 +27,8 @@ Route::get('categories', [CategoryController::class, 'index']);
 
 // "{category}" will use Route Model Binding
 Route::get('categories/{category}', [CategoryController::class, 'show']);
+// categories POST Request
+Route::post('categories', [CategoryController::class, 'store']);
 
 
 // Product API
