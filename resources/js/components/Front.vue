@@ -25,8 +25,8 @@
 
             <div class="col-lg-9">
 
-                <div class="row my-5" v-if="Array.isArray(products) && products.length > 0">
-                    <div class="col-lg-4 col-md-6 mb-4" v-for="product in products">
+                <div class="row my-5" v-if="Array.isArray(products.data) && products.data.length > 0">
+                    <div class="col-lg-4 col-md-6 mb-4" v-for="product in products.data">
                         <div class="card h-100">
                             <a :href="`/product/${product.name}`">
                                 <img class="card-img-top" src="http://placehold.it/700x400" alt="">
@@ -53,7 +53,14 @@
         </div>
         <!-- /.row -->
 
+        <!--  Vue pagination component we are binding data private property :data="products"
+     and method named "loadProducts" -->
+        <div class="d-flex align-items-center justify-content-center">
+            <pagination :data="products" @pagination-change-page="loadProducts"></pagination>
+        </div>
+
     </div>
+
 </template>
 
 
@@ -64,7 +71,7 @@ export default {
     data: function(){
       return {
           categories: [],
-          products: [],
+          products: {},
           loading: true
       }
     },
@@ -87,12 +94,13 @@ export default {
                 }
             );
         },
-        loadProducts: function (){
-            axios.get('/api/products').then(response => {
-                this.products = response.data.data;
+        loadProducts: function (page = 1){
+            axios.get(`/api/products?page=${page}`).then(response => {
+                console.log(response.data);
+                this.products = response.data;
                 this.loading = false;
             }).catch(err => {
-                console.log(err);
+                console.log('API Promise rejected error :', err);
             });
         }
     }
