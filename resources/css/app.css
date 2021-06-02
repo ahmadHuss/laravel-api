@@ -1,3 +1,11 @@
+#app {
+    min-height: 90vh;
+}
+
+footer {
+    min-height: 10vh;
+}
+
 .loading-wrapper {
     display: flex;
     justify-content: center;
