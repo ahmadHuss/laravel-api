@@ -1,12 +1,14 @@
-require('./bootstrap');
+//import vue
+import Vue from 'vue';
+import _ from 'lodash';
 
-// Require Vue
-window.Vue = require('vue');
+Vue.prototype._ = _;
 
 // id app
 Vue.component('front-page', require('./components/Front.vue').default);
 
+
 // load the front component
-const app = new Vue({
+new Vue({
     el: '#app'
 });
