@@ -4,7 +4,7 @@
 <template>
     <div class="container" :class="{'loading': loading}">
 
-        <!-- Spinner will only appear if the private property `loading` is true. -->
+        <!-- Spinner will only appear if the private property inside the function object `loading` is true. -->
         <div class="loading-wrapper" v-if="loading">
             <div class="spinner-border text-secondary" role="status">
                 <span class="sr-only">Loading...</span>
