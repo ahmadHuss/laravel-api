@@ -19,10 +19,17 @@ window.Vue = Vue;
 Vue.prototype._ = _;
 // id app
 Vue.component('front-page', require('./components/FrontPage.vue').default);
+
+// id app
+let categoriesCreate = Vue.component('categories-create', require('./components/CategoriesCreate.vue').default);
+
 // Load third party vue component `laravel-vue-pagination`
 Vue.component('pagination', require('laravel-vue-pagination'));
 
 // load the front component
 new Vue({
-    el: '#app'
+    el: '#app',
+    components: {
+        categoriesCreate: categoriesCreate
+    }
 });

@@ -16,3 +16,6 @@ use Illuminate\Support\Facades\Route;
 
 // Just load the Blade File
 Route::view('/', 'home');
+
+// Categories create.blade.php file for the form creation.
+Route::view('/categories/create', 'create')->name('categories.create');
