@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -38,4 +39,20 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+
+        // Override the render method i.e. coming from the class Handler
+        public function render($request, Throwable $e)
+        {
+            // To set the correct API error response for the findOrFail($id)
+            if ($e instanceof ModelNotFoundException) {
+                // str_replace(find:required,replace:required,string,count) => Returns a string or an array with the replaced values
+                return response()->json([
+                    'error' => 'Entry for '.str_replace('App\\Models\\', '', $e->getModel()). ' not found',
+                    'model' => $e->getModel()
+                ], 404);
+            }
+
+            return parent::render($request, $e);
+        }
 }

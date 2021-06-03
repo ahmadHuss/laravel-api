@@ -35,3 +35,36 @@ Route::post('categories', [CategoryController::class, 'store']);
 Route::get('products', [ProductController::class, 'index']);
 // "{product}" will use Route Model Binding
 Route::get('products/{product}', [ProductController::class, 'show']);
+
+
+/**
+ * Handling API Exceptions
+ *
+ * Tip 1. Switch APP_DEBUG=false Even Locally
+ *
+ * If someone calls API route that doesn’t exist, By default, you get this response from API:
+ * { "message": ""}
+ *
+ * Tip 2. Unhandled Routes – Fallback Method
+ * Route::fallback() method at the end of routes/api.php, handling all the routes that weren’t matched.
+ *
+ * The result will be the same 404 response, but now with error message that give some more information
+ * about what to do with this error.
+ */
+Route::fallback(function () {
+    return response()->json(['message' => 'Page Not Found. If error persists, contact API Owner.'], 404);
+});
+
+/**
+ * Tip 3. Override 404 ModelNotFoundException
+ *
+ * Most often exceptions is that some model object is not found, usually thrown by Model::findOrFail($id).
+ * If we leave it at that, here’s the typical message your API will show:
+ * {
+ * "message": "No query results for model [App\\Models\\Category] 19"
+ * }
+ *
+ * We can do that in app/Exceptions/Handler.php (remember that file, we will come back to it multiple times later),
+ * in render() method:
+ */
+
