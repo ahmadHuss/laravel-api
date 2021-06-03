@@ -68,3 +68,16 @@ Route::fallback(function () {
  * in render() method:
  */
 
+/**
+ * Tip 4. Catch As Much As Possible in Validation
+ * that consumer posts invalid data, and then stuff breaks.
+ * If we don’t put extra effort in catching bad data, then API
+ * will pass the back-end validation and throw just simple “Server error”
+ * without any details (which actually would mean DB query error).
+ *
+ * Let’s look at this example – we have a store() method in Controller and StoreFormRequest.
+ *
+ *
+ * Tip 5. Generally Avoid Empty 500 Server Error with Try-Catch
+ */
+
