@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -32,9 +33,13 @@ class CategoryController extends Controller
     }
 
     // Post store
-    public function store(Request $request) {
-        $category = Category::create($request->all());
-        return new CategoryResource($category);
+    public function store(StoreCategoryRequest $request) {
+        try {
+            $category = Category::create($request->all());
+            return new CategoryResource($category);
+        } catch (Illuminate\Database\QueryException $e) {
+
+        }
     }
 
 
