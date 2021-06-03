@@ -28,7 +28,8 @@ export default {
                 }).then( function(response) {
                     console.log('New Category ID', response.data.data.id);
                 }).catch(function(err) {
-                    console.log('Category Route error Promise has been rejected!', err);
+                    console.log(err);
+                    console.log('Category Route error Promise has been rejected!', err.response.data.errors);
             });
         }
     }
