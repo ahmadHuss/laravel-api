@@ -48,8 +48,7 @@ class Handler extends ExceptionHandler
             if ($e instanceof ModelNotFoundException) {
                 // str_replace(find:required,replace:required,string,count) => Returns a string or an array with the replaced values
                 return response()->json([
-                    'error' => 'Entry for '.str_replace('App\\Models\\', '', $e->getModel()). ' not found',
-                    'model' => $e->getModel()
+                    'error' => 'Entry for '.str_replace('App\\Models\\', '', $e->getModel()). ' not found'
                 ], 404);
             }
 
