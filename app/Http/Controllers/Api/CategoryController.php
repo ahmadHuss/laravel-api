@@ -34,12 +34,8 @@ class CategoryController extends Controller
 
     // Post store
     public function store(StoreCategoryRequest $request) {
-        try {
             $category = Category::create($request->all());
             return new CategoryResource($category);
-        } catch (Illuminate\Database\QueryException $e) {
-
-        }
     }
 
 
