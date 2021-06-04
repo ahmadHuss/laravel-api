@@ -20,8 +20,23 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// API route all methods are same like ResourceController
-// index, |create, store($request)|, show($id), |edit($id), update($request, $id)|, destroy($id)
+/**
+ * Note: Default resourceful controller syntax is something like this
+ * Route::resource('categories', CategoryController::class);
+ *
+ * The resourceful controller has 7 methods which are defined by default at the time of creation.
+ * index, [ create, store($request) ], show($id), [ edit($id), update($request, $id) ], destroy($id)
+ *
+ * There is also a Api resource but the Api resource has 5 methods.
+ * i.e.
+ * index()
+ * show(Category $category)
+ * store(Request $request),
+ * update(Category $category, StoreCategoryRequest $request)
+ * destroy(Category $category)
+ */
+
+/*
 // Now we have to create the Category API
 Route::get('categories', [CategoryController::class, 'index']);
 
@@ -33,7 +48,14 @@ Route::post('categories', [CategoryController::class, 'store']);
 Route::put('/categories/{category}', [CategoryController::class, 'update']);
 // categories delete method
 Route::delete('/categories/{category}', [CategoryController::class, 'destroy']);
+*/
 
+/**
+ * I commented all the above API routes because I want to use "API resource" which is
+ * builtin Laravel feature and clean way for the API CRUD which behind the scenes using
+ * all these 5 methods.
+ */
+Route::apiResource('categories', CategoryController::class);
 
 // Product API
 Route::get('products', [ProductController::class, 'index']);
