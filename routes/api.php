@@ -29,6 +29,8 @@ Route::get('categories', [CategoryController::class, 'index']);
 Route::get('categories/{category}', [CategoryController::class, 'show']);
 // categories POST Request
 Route::post('categories', [CategoryController::class, 'store']);
+// categories update method
+Route::put('/categories/{category}', [CategoryController::class, 'update']);
 
 
 // Product API

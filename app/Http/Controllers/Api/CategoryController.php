@@ -48,4 +48,15 @@ class CategoryController extends Controller
     }
 
 
+    // Update method
+    public function update(Category $category, StoreCategoryRequest $request) {
+        try {
+            $category->update($request->all());
+            return new CategoryResource($category);
+        } catch (Exception $e) {
+            abort(500,'Could not update category');
+        }
+    }
+
+
 }
