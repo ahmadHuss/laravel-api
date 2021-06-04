@@ -31,6 +31,8 @@ Route::get('categories/{category}', [CategoryController::class, 'show']);
 Route::post('categories', [CategoryController::class, 'store']);
 // categories update method
 Route::put('/categories/{category}', [CategoryController::class, 'update']);
+// categories delete method
+Route::delete('/categories/{category}', [CategoryController::class, 'destroy']);
 
 
 // Product API

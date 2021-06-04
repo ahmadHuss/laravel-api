@@ -7,6 +7,7 @@ use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use Exception;
+use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceResponse;
 
@@ -55,6 +56,16 @@ class CategoryController extends Controller
             return new CategoryResource($category);
         } catch (Exception $e) {
             abort(500,'Could not update category');
+        }
+    }
+
+    // Delete method
+    public function destroy(Category $category) {
+        try {
+            $category->delete();
+            return response(null, RESPONSE::HTTP_NO_CONTENT);
+        } catch (Exception $e) {
+            abort(500,'Could not delete this category');
         }
     }
 
