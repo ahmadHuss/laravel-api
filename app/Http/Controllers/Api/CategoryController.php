@@ -5,21 +5,24 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Resources\CategoryResource;
+use App\Http\Traits\URLScheme;
 use App\Models\Category;
 use Exception;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
 use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\ResourceResponse;
 
 class CategoryController extends Controller
 {
+    use URLScheme;
+
     public function index()
     {
         //  return Category::orderBy('id')->get(); // Laravel will return as JSON format.
         // We only want id, name filed in the response.
         // $categories = Category::select('id','name')->get(); This is efficient approach.
         // But we are already defined our toArray response
-        $categories = Category::all();
+        $categories = Category::orderBy('id')->get();
         return CategoryResource::collection($categories); // Now we are returning resource collection
     }
 
@@ -40,8 +43,8 @@ class CategoryController extends Controller
     public function store(StoreCategoryRequest $request)
     {
         try {
-            $category = Category::create($request->all());
-            // 201 means Created Successfully
+            $data = $this->storeUpdateCategoryPhoto($request);
+            $category = Category::create($data);
             return (new CategoryResource($category))->response()->setStatusCode(201);
         } catch (Exception $exception) { // Anything that went wrong
             abort(500, 'Could not create category');
@@ -70,4 +73,37 @@ class CategoryController extends Controller
     }
 
 
+    // Method for storing or uploading category name & photo
+    private function storeUpdateCategoryPhoto(StoreCategoryRequest $request, Category $category = null, bool $deleteOldFile = false): array
+    {
+        // Update data
+        $data = $request->all();
+
+        if ($request->hasFile('photo')) {
+
+            // If there is a photo(jpg|jpeg|png) inside the request
+            // then it means we have to delete the old photo from the file system
+            // and replace with the new one.
+            if ($deleteOldFile && $category->photo) {
+                // Returns trailing name component of path
+                $oldPath = basename($category->photo); // 6546dgfgfdgfg.jpg
+                Storage::delete('/public/categories/'.$oldPath);
+            }
+
+            $file = $request->file('photo');
+            /*
+            // Old way to store images
+            $filename = 'categories/' . uniqid() . '.' . $file->extension(); // categories/6546dgfgfdgfg.jpg
+            $file->storePubliclyAs('public', $filename); // Store inside filesystem categories/6546dgfgfdgfg.jpg
+            */
+
+            // New way
+            $fileDirectory = '/categories/';
+            $fileName = uniqid().'.'. $file->extension();
+            Storage::putFileAs('public'.$fileDirectory, $file, $fileName);
+
+            $data['photo'] = URL::to(''.'storage'.$fileDirectory.$fileName, [], $this->isSecureScheme()); // http://lara8api.test/storage/categories/6546dgfgfdgfg.jpg
+        }
+        return $data;
+    }
 }
