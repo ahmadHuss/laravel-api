@@ -20,3 +20,4 @@ Route::view('/', 'home');
 // Categories create.blade.php file for the form creation.
 Route::view('/categories', 'index')->name('categories.index');
 Route::view('/categories/create', 'create')->name('categories.create');
+Route::view('/categories/{category}/edit', 'edit')->name('categories.edit');

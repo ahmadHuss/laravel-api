@@ -11,6 +11,7 @@ Vue.component('front-page', require('./components/FrontPage.vue').default);
 // id app
 let categoriesIndex = Vue.component('categories-index', require('./components/CategoriesIndex.vue').default);
 let categoriesCreate = Vue.component('categories-create', require('./components/CategoriesCreate.vue').default);
+let categoriesEdit = Vue.component('categories-edit', require('./components/CategoriesEdit.vue').default);
 
 // Load third party vue component `laravel-vue-pagination`
 Vue.component('pagination', require('laravel-vue-pagination'));
@@ -20,6 +21,7 @@ new Vue({
     el: '#app',
     components: {
         categoriesIndex: categoriesIndex,
-        categoriesCreate: categoriesCreate
+        categoriesCreate: categoriesCreate,
+        categoriesEdit: categoriesEdit
     }
 });

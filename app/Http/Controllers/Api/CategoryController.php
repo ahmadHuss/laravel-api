@@ -56,8 +56,9 @@ class CategoryController extends Controller
     // Update method
     public function update(Category $category, StoreCategoryRequest $request) {
         try {
-            $category->update($request->all());
-            return new CategoryResource($category);
+            $data = $this->storeUpdateCategoryPhoto($request, $category, true);
+            $category->update($data);
+            return (new CategoryResource($category))->response()->setStatusCode(201);
         } catch (Exception $e) {
             abort(500,'Could not update category');
         }
