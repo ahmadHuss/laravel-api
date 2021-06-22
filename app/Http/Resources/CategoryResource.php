@@ -17,7 +17,8 @@ class CategoryResource extends JsonResource
         // In this method we have to override the results.
         return [
           'id' => $this->id,
-          'name' => $this->name
+          'name' => $this->name,
+          'photo' => $this->photo
         ];
     }
 }
