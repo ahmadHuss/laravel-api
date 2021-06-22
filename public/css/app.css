@@ -1,1 +1,116 @@
-#app{min-height:90vh}footer{min-height:10vh}.loading-wrapper{display:flex;justify-content:center;align-items:center;position:fixed;top:0;left:0;right:0;bottom:0;background-color:#fff;z-index:1029}
+#app {
+    min-height: 90vh;
+}
+
+footer {
+    min-height: 10vh;
+}
+
+.loading-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fff;
+    z-index: 1029;
+}
+
+.api {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+}
+
+.api:hover .api__overlay {
+
+}
+
+.api__overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 8px;
+    background-color: rgba(0,0,0,.8);
+}
+
+.api--opacity .api__overlay {
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+}
+
+.api--opacity:hover .api__overlay {
+    opacity: 1;
+}
+
+
+/* Custom Image upload */
+.api-file {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}
+
+/* This is the main label file where user will click to upload items. */
+.api-file__label {
+    position: relative;
+    align-items: stretch;
+    display: flex;
+    cursor: pointer;
+    justify-content: flex-start;
+    overflow: hidden;
+    margin: 0;
+}
+
+.api-file__input {
+    height: 100%;
+    left: 0;
+    opacity: 0;
+    outline: none;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.api-file__btn {
+    /* Very very important property. */
+    position: relative;
+    color: #fff;
+    background-color: #007bff;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    border: 1px solid  #007bff;
+    padding: 6px 12px;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+}
+
+.api-file__text {
+    align-items: stretch;
+    display: flex;
+    cursor: pointer;
+    justify-content: flex-start;
+    overflow: hidden;
+    position: relative;
+}
+
