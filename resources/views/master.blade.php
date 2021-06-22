@@ -12,7 +12,7 @@
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- Bootstrap core CSS -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
 
 <body style="padding-top: 56px">
@@ -28,7 +28,7 @@
         <div class="collapse navbar-collapse justify-content-lg-end" id="navbarResponsive">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('categories.create')}}">Create Category</a>
+                    <a class="nav-link" href="{{route('categories.index')}}">Categories</a>
                 </li>
             </ul>
         </div>
@@ -48,7 +48,7 @@
 <!-- Bootstrap core JavaScript -->
 <script src="{{ asset('js/jquery.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ mix('js/app.js') }}"></script>
 
 
 </body>
