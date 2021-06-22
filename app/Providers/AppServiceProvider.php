@@ -2,12 +2,12 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\URL;
+use App\Http\Traits\URLScheme;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
+    use URLScheme;
     /**
      * Register any application services.
      *
@@ -25,10 +25,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (App::Environment('local')) {
-            URL::forceScheme('http');
-        } else {
-            URL::forceScheme('https');
-        }
+        $this->checkURLScheme();
     }
 }
