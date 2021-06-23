@@ -80,31 +80,17 @@ class CategoryController extends Controller
     {
         // Update data
         $data = $request->all();
-
         if ($request->hasFile('photo')) {
 
-            // If there is a photo(jpg|jpeg|png) inside the request
+            // During update: If there is a photo(jpg|jpeg|png) inside the request
             // then it means we have to delete the old photo from the file system
             // and replace with the new one.
             if ($deleteOldFile && $category->photo) {
-                // Returns trailing name component of path
-                $oldPath = basename($category->photo); // 6546dgfgfdgfg.jpg
-                Storage::delete('/public/categories/'.$oldPath);
+               $this->categoryFileDelete($category->photo);
             }
 
             $file = $request->file('photo');
-            /*
-            // Old way to store images
-            $filename = 'categories/' . uniqid() . '.' . $file->extension(); // categories/6546dgfgfdgfg.jpg
-            $file->storePubliclyAs('public', $filename); // Store inside filesystem categories/6546dgfgfdgfg.jpg
-            */
-
-            // New way
-            $fileDirectory = '/categories/';
-            $fileName = uniqid().'.'. $file->extension();
-            Storage::putFileAs('public'.$fileDirectory, $file, $fileName);
-
-            $data['photo'] = URL::to(''.'storage'.$fileDirectory.$fileName, [], $this->isSecureScheme()); // http://lara8api.test/storage/categories/6546dgfgfdgfg.jpg
+            $data['photo'] = $this->categoryFileStore($file);
         }
         return $data;
     }
