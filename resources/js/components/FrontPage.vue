@@ -14,7 +14,7 @@
         <!-- If there is an Error please show -->
         <div class="loading-wrapper" v-if="error">
             <div class="text-center text-secondary">
-                <h1>Sorry, No records found!</h1>
+                <p>Sorry, No records found! Maybe database connection error.</p>
             </div>
         </div>
 
@@ -79,7 +79,7 @@ export default {
     data: function(){
       return {
           categories: [],
-          products: [],
+          products: {}, // Products has object literal because we are depend upon third party Vue.js component
           loading: true,
           error: false
       }

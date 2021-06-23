@@ -2343,7 +2343,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       categories: [],
-      products: [],
+      products: {},
+      // Products has object literal because we are depend upon third party Vue.js component
       loading: true,
       error: false
     };
@@ -21361,7 +21362,9 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "text-center text-secondary" }, [
-      _c("h1", [_vm._v("Sorry, No records found!")])
+      _c("p", [
+        _vm._v("Sorry, No records found! Maybe database connection error.")
+      ])
     ])
   }
 ]
