@@ -28,5 +28,5 @@ export const onSingleFileUpload = function(event) {
 
 export const uploadProgress = function(uploadEvent) {
     const { loaded, total} = uploadEvent;
-    console.log(`Uploading status : ${(loaded / total) * 100}%`);
+    console.log(`Uploading status : ${Math.round((loaded / total) * 100)}%`);
 }

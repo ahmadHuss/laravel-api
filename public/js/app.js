@@ -2499,7 +2499,7 @@ var onSingleFileUpload = function onSingleFileUpload(event) {
 var uploadProgress = function uploadProgress(uploadEvent) {
   var loaded = uploadEvent.loaded,
       total = uploadEvent.total;
-  console.log("Uploading status : ".concat(loaded / total * 100, "%"));
+  console.log("Uploading status : ".concat(Math.round(loaded / total * 100), "%"));
 };
 
 /***/ }),
