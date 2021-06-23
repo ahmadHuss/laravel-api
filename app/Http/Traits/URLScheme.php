@@ -3,6 +3,7 @@
 namespace App\Http\Traits;
 
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 
 trait URLScheme {
@@ -26,6 +27,46 @@ trait URLScheme {
             URL::forceScheme('http');
         } else {
             URL::forceScheme('https');
+        }
+    }
+
+
+    /**
+     * Old way to store images
+     * $filename = 'categories/' . uniqid() . '.' . $file->extension(); // categories/6546dgfgfdgfg.jpg
+     * $file->storePubliclyAs('public', $filename); // Store inside filesystem categories/6546dgfgfdgfg.jpg
+     */
+
+    /**
+     * @param $file
+     * @return string
+     */
+    public function categoryFileStore($file): string
+    {
+        $fileDirectory = 'categories/';
+        $fileName = uniqid().'.'.$file->extension();
+        if (App::environment('local')) {
+            Storage::disk('public')->put($fileDirectory.$fileName, file_get_contents($file));
+            return Storage::disk('public')->url($fileDirectory.$fileName);
+        } else {
+            Storage::disk('s3')->put($fileDirectory.$fileName, file_get_contents($file));
+            return Storage::disk('s3')->url($fileDirectory.$fileName);
+        }
+    }
+
+
+    /**
+     * @param string $oldFilePath
+     */
+    public function categoryFileDelete(string $oldFilePath)
+    {
+        $fileDirectory = 'categories/';
+         // Returns trailing name component of path e.g. ( 6546dgfgfdgfg.jpg)
+        $oldPath = basename($oldFilePath); //
+        if (App::environment('local')) {
+            Storage::disk('public')->delete($fileDirectory.$oldPath);
+        } else {
+            Storage::disk('s3')->delete($fileDirectory.$oldPath);
         }
     }
 }
