@@ -11,6 +11,13 @@
             </div>
         </div>
 
+        <!-- If there is an Error please show -->
+        <div class="loading-wrapper" v-if="error">
+            <div class="text-center text-secondary">
+                <h1>Sorry, No records found!</h1>
+            </div>
+        </div>
+
         <div class="row">
 
             <div class="col-lg-3">
@@ -72,8 +79,9 @@ export default {
     data: function(){
       return {
           categories: [],
-          products: {},
-          loading: true
+          products: [],
+          loading: true,
+          error: false
       }
     },
     // Private method runs before the component is mount on the screen
@@ -91,7 +99,7 @@ export default {
             axios.get('/api/categories').then(response => {
                 this.categories = response.data.data;
             }).catch(err => {
-                    console.log('API Promise rejected error :', err);
+                    console.log('API Promise rejected error categories :', err);
                 }
             );
         },
@@ -101,7 +109,9 @@ export default {
                 this.products = response.data;
                 this.loading = false;
             }).catch(err => {
-                console.log('API Promise rejected error :', err);
+                this.error = true;
+                this.loading = false;
+                console.log('API Promise rejected error products:', err);
             });
         }
     }

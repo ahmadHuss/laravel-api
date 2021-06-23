@@ -2330,14 +2330,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'FrontPage',
   // Public properties
   data: function data() {
     return {
       categories: [],
-      products: {},
-      loading: true
+      products: [],
+      loading: true,
+      error: false
     };
   },
   // Private method runs before the component is mount on the screen
@@ -2357,7 +2365,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('/api/categories').then(function (response) {
         _this.categories = response.data.data;
       })["catch"](function (err) {
-        console.log('API Promise rejected error :', err);
+        console.log('API Promise rejected error categories :', err);
       });
     },
     loadProducts: function loadProducts() {
@@ -2369,7 +2377,9 @@ __webpack_require__.r(__webpack_exports__);
         _this2.products = response.data;
         _this2.loading = false;
       })["catch"](function (err) {
-        console.log('API Promise rejected error :', err);
+        _this2.error = true;
+        _this2.loading = false;
+        console.log('API Promise rejected error products:', err);
       });
     }
   }
@@ -21236,6 +21246,10 @@ var render = function() {
         ? _c("div", { staticClass: "loading-wrapper" }, [_vm._m(0)])
         : _vm._e(),
       _vm._v(" "),
+      _vm.error
+        ? _c("div", { staticClass: "loading-wrapper" }, [_vm._m(1)])
+        : _vm._e(),
+      _vm._v(" "),
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-lg-3" }, [
           _c("h1", { staticClass: "my-4" }, [_vm._v("Shop Catalog")]),
@@ -21341,6 +21355,14 @@ var staticRenderFns = [
       },
       [_c("span", { staticClass: "sr-only" }, [_vm._v("Loading...")])]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "text-center text-secondary" }, [
+      _c("h1", [_vm._v("Sorry, No records found!")])
+    ])
   }
 ]
 render._withStripped = true
