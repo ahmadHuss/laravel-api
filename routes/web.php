@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,10 +13,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Just load the Blade File
-Route::view('/', 'home');
+// ------------- Default SPA Routes -------------
+// Route::view('/', 'home'); // Just load the Blade File
 
 // Categories create.blade.php file for the form creation.
 Route::view('/categories', 'index')->name('categories.index');
 Route::view('/categories/create', 'create')->name('categories.create');
 Route::view('/categories/{category}/edit', 'edit')->name('categories.edit');
+// ------------- End - Default SPA Routes -------------
+
+
+// ------------- Laravel Breeze Authentication Routes -------------
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
+// ------------- End - Laravel Breeze Authentication Routes -------------
